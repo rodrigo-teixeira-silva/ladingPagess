@@ -1,0 +1,8 @@
+import type { Course } from '@/types/course';
+// Dados demonstrativos: confirmar catálogo, descrições e inscrições antes da publicação.
+export const courses: Course[] = [
+  { id: '1', slug: 'redacao-para-o-enem', title: 'Redação para o ENEM', shortDescription: 'Estrutura, repertório, argumentação e propostas de redação comentadas.', description: 'Uma proposta de estudo da redação dissertativa-argumentativa: planejamento do texto, construção de argumentos, coesão e proposta de intervenção. Este curso é demonstrativo e seu programa será confirmado.', image: '/assets/images/curso-redacao-enem.webp', featured: true, published: true, order: 1 },
+  { id: '2', slug: 'gramatica-completa', title: 'Gramática Completa', shortDescription: 'Do básico ao avançado, com exercícios e resoluções.', description: 'Revise os fundamentos da língua portuguesa, da morfologia à sintaxe, com atenção à interpretação e ao uso da língua em provas. Este curso é demonstrativo e seu programa será confirmado.', image: '/assets/images/curso-gramatica-completa.webp', featured: true, published: true, order: 2 },
+  { id: '3', slug: 'literatura-brasileira', title: 'Literatura Brasileira', shortDescription: 'Obras, autores, escolas literárias e resumos essenciais.', description: 'Conheça movimentos da literatura brasileira e explore a relação entre obras, autores e contextos históricos. Este curso é demonstrativo e seu programa será confirmado.', image: '/assets/images/curso-literatura-brasileira.webp', featured: true, published: true, order: 3 },
+];
+export const featuredCourses = courses.filter(c => c.published && c.featured).sort((a,b) => a.order-b.order);

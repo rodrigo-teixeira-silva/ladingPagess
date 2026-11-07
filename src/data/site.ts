@@ -1,0 +1,1 @@
+export const site = {name:'Edson Botelho Jr.',tagline:'Linguagens e Redação',description:'Português para concursos, ENEM e vestibulares. Explore cursos de gramática, redação e literatura e conteúdos gratuitos.', contact: {email:'',phone:''},socials: [] as {label:string;url:string}[]};

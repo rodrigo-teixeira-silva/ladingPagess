@@ -1,0 +1,6 @@
+﻿import Link from 'next/link';
+import { Brand } from './Header';
+import { Container } from '@/components/ui/Container';
+import { site } from '@/data/site';
+import { validExternalUrl } from '@/lib/utils';
+export function Footer(){return <footer><Container><div className="footer-grid"><div><Brand/><p>Conhecimento que abre caminhos.<br/>Um passo de cada vez, com clareza.</p></div><div><h2>Explore o portal</h2><Link href="/">Início</Link><Link href="/#cursos">Cursos</Link><Link href="/sobre">Sobre o professor</Link><Link href="/contato">Contato</Link></div><div><h2>Conteúdos Gratuitos</h2><Link href="/artigos">Artigos</Link><Link href="/simulados">Simulados</Link><Link href="/aulas-basicas">Aulas Básicas</Link></div><div><h2>Acompanhe</h2><p>Novidades e conteúdos<br/>para seus estudos.</p>{site.contact.email&&<a href={`mailto:${site.contact.email}`}>{site.contact.email}</a>}{site.contact.phone&&<p>{site.contact.phone}</p>}{site.socials.map(s=>validExternalUrl(s.url)&&<a key={s.label} href={s.url} target="_blank" rel="noopener noreferrer">{s.label}</a>)}</div></div><div className="footer-bottom"><span>© {new Date().getFullYear()} Edson Botelho Jr. Todos os direitos reservados.</span><span>Linguagens que transformam.</span></div></Container></footer>;}
