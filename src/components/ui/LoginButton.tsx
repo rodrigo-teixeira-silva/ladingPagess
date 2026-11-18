@@ -1,20 +1,19 @@
 
 "use client";
 
-import { useState, type ComponentProps, type ComponentType } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
+
 import { Button } from "@/components/ui/Button";
 import { loginWithGoogle } from "@/services/authServices";
-
-const ButtonWithClick = Button as ComponentType<
-  ComponentProps<typeof Button> & { onClick: () => void }
->;
 
 export function LoginButton() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 
   async function handleLogin(): Promise<void> {
+    if (loading) return;
+
     try {
       setLoading(true);
 
@@ -34,9 +33,11 @@ export function LoginButton() {
     }
   }
 
-   return (
+  return (
     <Button
-      onClick={() => void handleLogin()}
+      onClick={() => {
+        void handleLogin();
+      }}
       secondary
       icon={null}
     >
