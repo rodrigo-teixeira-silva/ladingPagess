@@ -7,3 +7,6 @@ out/
 artifacts/
 test-results/
 playwright-report/
+
+# Gerado a partir de firestore.rules.template (npm run rules)
+/firestore.rules

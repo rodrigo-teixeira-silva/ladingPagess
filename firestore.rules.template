@@ -1,0 +1,46 @@
+rules_version = '2';
+
+// TEMPLATE. Não edite firestore.rules diretamente: ele é gerado por `npm run rules`
+// a partir deste arquivo, usando NEXT_PUBLIC_ADMIN_EMAILS do .env.local.
+// Depois de gerar, publique em: Console Firebase > Firestore Database > Regras.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isAdmin() {
+      return request.auth != null
+        && request.auth.token.email_verified == true
+        && request.auth.token.email.lower() in __ADMIN_EMAILS__;
+    }
+
+    // Público lê apenas cursos publicados; admin lê e grava tudo.
+    match /courses/{courseId} {
+      allow read: if resource.data.published == true || isAdmin();
+      allow write: if isAdmin();
+    }
+
+    // Imagens dos cards (base64). Leitura pública, gravação só do admin.
+    match /courseImages/{courseId} {
+      allow read: if true;
+      allow write: if isAdmin()
+        && (request.resource == null
+            || request.resource.data.contentType in ['image/webp', 'image/jpeg', 'image/png']);
+    }
+
+    // Conteúdo editável das páginas (Início, Artigos, Sobre...). Leitura pública, gravação só do admin.
+    match /pages/{pageId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Imagens das páginas (ex.: fundo do topo da Home).
+    match /siteImages/{imageId} {
+      allow read: if true;
+      allow write: if isAdmin()
+        && (request.resource == null
+            || request.resource.data.contentType in ['image/webp', 'image/jpeg', 'image/png']);
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

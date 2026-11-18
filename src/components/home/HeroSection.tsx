@@ -1,14 +1,13 @@
 import Image from "next/image";
-import heroImage from "../../../public/assets/images/hero-livros-cursos.png";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 
-export function HeroSection() {
+export function HeroSection({ content }: { content: Record<string, string> }) {
   return (
     <section className="hero">
       <div className="hero-visual">
         <Image
-          src={heroImage}
+          src={content.heroImage}
           alt="Livros de Gramática da Língua Portuguesa, Literatura Brasileira, Redação, Interpretação de Textos, ENEM e Vestibulares e Concursos Públicos sobre uma mesa com caderno e canetas, em uma biblioteca."
           fill
           priority
@@ -19,15 +18,13 @@ export function HeroSection() {
       <Container>
         <div className="hero-copy">
           <h1>
-            Português para
+            {content.heroLine1}
             <br />
-            <em>Concursos, ENEM</em>
-            <br />e Vestibulares
+            <em>{content.heroHighlight}</em>
+            <br />
+            {content.heroLine2}
           </h1>
-          <p>
-            Gramática, interpretação de textos, redação e literatura, com
-            conteúdos práticos e objetivos.
-          </p>
+          {content.heroText && <p>{content.heroText}</p>}
           <div className="hero-actions">
             <Button href="#cursos" icon="aulas">
               Conheça os Cursos
