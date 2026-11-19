@@ -19,7 +19,7 @@ export function LoginButton() {
 
       await loginWithGoogle();
 
-      router.push("/admin");
+      router.push("/admin/cursos");
     } catch (error) {
       console.error("Erro no login:", error);
 
