@@ -20,9 +20,9 @@ service cloud.firestore {
     // Imagens dos cards (base64). Leitura pública, gravação só do admin.
     match /courseImages/{courseId} {
       allow read: if true;
-      allow write: if isAdmin()
-        && (request.resource == null
-            || request.resource.data.contentType in ['image/webp', 'image/jpeg', 'image/png']);
+      allow create, update: if isAdmin()
+        && request.resource.data.contentType in ['image/webp', 'image/jpeg', 'image/png'];
+      allow delete: if isAdmin();
     }
 
     // Conteúdo editável das páginas (Início, Artigos, Sobre...). Leitura pública, gravação só do admin.
@@ -34,9 +34,9 @@ service cloud.firestore {
     // Imagens das páginas (ex.: fundo do topo da Home).
     match /siteImages/{imageId} {
       allow read: if true;
-      allow write: if isAdmin()
-        && (request.resource == null
-            || request.resource.data.contentType in ['image/webp', 'image/jpeg', 'image/png']);
+      allow create, update: if isAdmin()
+        && request.resource.data.contentType in ['image/webp', 'image/jpeg', 'image/png'];
+      allow delete: if isAdmin();
     }
 
     match /{document=**} {
@@ -44,3 +44,4 @@ service cloud.firestore {
     }
   }
 }
+ 
